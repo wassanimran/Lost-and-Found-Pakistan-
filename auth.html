@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+<header>
+    <h2>Lost &amp; <span>Found</span></h2>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="lost-items.html">Lost</a>
+        <a href="found-items.html">Found</a>
+        <a href="report-lost.html">Report Lost</a>
+        <a href="report-found.html">Report Found</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+<section class="section auth-section">
+    <h1>Account Access</h1>
+    <p id="authStatus" class="auth-status">Sign in or create an account to submit reports.</p>
+
+    <div class="auth-tabs">
+        <button type="button" class="active" data-target="loginPanel">Login</button>
+        <button type="button" data-target="signupPanel">Sign Up</button>
+        <button type="button" data-target="resetPanel">Reset Password</button>
+    </div>
+
+    <div class="auth-grid">
+        <form id="loginForm" class="auth-panel auth-card active" novalidate>
+            <h2>Login</h2>
+            <label>Email<input type="email" name="email" required autocomplete="email"></label>
+            <label>Password<input type="password" name="password" required autocomplete="current-password"></label>
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+
+        <form id="signupForm" class="auth-panel auth-card" novalidate>
+            <h2>Create Account</h2>
+            <label>Full Name<input type="text" name="name" required autocomplete="name"></label>
+            <label>Email<input type="email" name="email" required autocomplete="email"></label>
+            <label>Password<input type="password" name="password" required minlength="6" autocomplete="new-password"></label>
+            <button class="btn btn-primary" type="submit">Create Account</button>
+        </form>
+
+        <form id="resetPasswordForm" class="auth-panel auth-card" novalidate>
+            <h2>Reset Password</h2>
+            <label>Email<input type="email" name="email" required autocomplete="email"></label>
+            <button class="btn btn-secondary" type="submit">Send Reset Link</button>
+        </form>
+    </div>
+</section>
+<footer>© 2026 Lost &amp; Found Pakistan</footer>
+<script type="module" src="main.js"></script>
+</body>
+</html>

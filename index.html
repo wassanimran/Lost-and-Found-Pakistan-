@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Home</title>
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found Pakistan</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <header>
-    <h2>Lost & Found</h2>
+    <h2>Lost &amp; <span>Found</span></h2>
     <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -20,25 +21,39 @@
     </nav>
 </header>
 
+<section class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+        <div class="hero-badge">Pakistan Lost &amp; Found Network</div>
+        <h1>Reconnect people with their missing belongings</h1>
+        <p>Report lost items, publish found items, and search verified community reports powered by Firebase.</p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="report-lost.html">Report Lost Item</a>
+            <a class="btn btn-secondary" href="report-found.html">Report Found Item</a>
+        </div>
+        <p id="authStatus" class="auth-status hero-status">Checking sign-in status…</p>
+    </div>
+</section>
 
-<div class='hero'>
-<h1>Find Your Lost Items Easily</h1>
-<p>Helping people reconnect with belongings</p>
-</div>
-<div class='section'><h2>Recent Lost Items</h2>
-<div class='cards'>
-<div class='card'>💼 Wallet - Campus Gate</div>
-<div class='card'>📱 Phone - Library</div>
-<div class='card'>🎒 Bag - Cafeteria</div>
-</div></div>
-<div class='section'><h2>Recent Found Items</h2>
-<div class='cards'>
-<div class='card'>🔑 Keys - Parking</div>
-<div class='card'>💾 USB - Lab</div>
-<div class='card'>🧴 Bottle - Cafe</div>
-</div></div>
+<section class="section">
+    <h2>How it works</h2>
+    <div class="cards">
+        <article class="card feature-item"><h3>1. Create an account</h3><p>Use Firebase Authentication to safely sign up or log in.</p></article>
+        <article class="card feature-item"><h3>2. Submit a report</h3><p>Lost and found forms are saved directly to Cloud Firestore.</p></article>
+        <article class="card feature-item"><h3>3. Search live reports</h3><p>Lost and found item pages load the latest Firebase data in real time.</p></article>
+    </div>
+</section>
 
+<section class="section">
+    <h2>Browse reports</h2>
+    <div class="cards">
+        <a class="card" href="lost-items.html"><h3>Lost Items</h3><p>Search items reported missing across Pakistan.</p></a>
+        <a class="card" href="found-items.html"><h3>Found Items</h3><p>View items submitted by helpful finders.</p></a>
+        <a class="card" href="auth.html"><h3>My Account</h3><p>Sign in, create an account, or reset your password.</p></a>
+    </div>
+</section>
 
-<footer>© 2026 Lost & Found System</footer>
+<footer>© 2026 Lost &amp; Found Pakistan</footer>
+<script type="module" src="main.js"></script>
 </body>
 </html>
