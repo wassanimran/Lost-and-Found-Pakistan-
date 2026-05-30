@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Contact</title>
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <header>
-    <h2>Lost & Found</h2>
+    <h2>Lost &amp; <span>Found</span></h2>
     <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -20,8 +21,19 @@
     </nav>
 </header>
 
-<div class='section'><h1>Contact</h1><input placeholder='Name'><input placeholder='Email'><textarea placeholder='Message'></textarea><button>Send</button></div>
+<section class="section form-section contact-section">
+    <h1>Contact Us</h1>
+    <p>Send a message to the Lost &amp; Found Pakistan team. Messages are stored in Firebase Firestore.</p>
+    <form class="contact-form firebase-form" novalidate>
+        <label>Name<input name="name" required autocomplete="name"></label>
+        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+        <label>Subject<input name="subject" required></label>
+        <label>Message<textarea name="message" maxlength="800" required></textarea></label>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+    </form>
+</section>
 
-<footer>© 2026 Lost & Found System</footer>
+<footer>© 2026 Lost &amp; Found Pakistan</footer>
+<script type="module" src="main.js"></script>
 </body>
 </html>

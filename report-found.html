@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Report Found</title>
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Found Item</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <header>
-    <h2>Lost & Found</h2>
+    <h2>Lost &amp; <span>Found</span></h2>
     <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -20,8 +21,26 @@
     </nav>
 </header>
 
-<div class='section'><h1>Report Found</h1><input placeholder='Item Name'><textarea placeholder='Details'></textarea><button>Submit</button></div>
+<section class="section form-section">
+    <h1>Report a Found Item</h1>
+    <p id="authStatus" class="auth-status">Please sign in before submitting a found item report.</p>
+    <form class="report-form firebase-form" data-report-type="found" novalidate>
+        <label>Item Name<input name="itemName" placeholder="e.g., Set of keys" required></label>
+        <label>Category
+            <select name="category" required>
+                <option value="">Select category</option>
+                <option>Wallet</option><option>Phone</option><option>Bag</option><option>Documents</option><option>Keys</option><option>Electronics</option><option>Other</option>
+            </select>
+        </label>
+        <label>Found Date<input type="date" name="date" required></label>
+        <label>Found Location<input name="location" placeholder="City, campus, station, street" required></label>
+        <label>Contact Number<input name="contact" placeholder="Phone or WhatsApp" required></label>
+        <label>Details<textarea name="details" maxlength="600" placeholder="Describe where/how it was found and identifying details" required></textarea></label>
+        <button class="btn btn-primary" type="submit">Submit Found Report</button>
+    </form>
+</section>
 
-<footer>© 2026 Lost & Found System</footer>
+<footer>© 2026 Lost &amp; Found Pakistan</footer>
+<script type="module" src="main.js"></script>
 </body>
 </html>

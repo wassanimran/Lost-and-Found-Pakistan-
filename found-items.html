@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Found Items</title>
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Found Items</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <header>
-    <h2>Lost & Found</h2>
+    <h2>Lost &amp; <span>Found</span></h2>
     <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -20,8 +21,20 @@
     </nav>
 </header>
 
-<div class='section'><h1>Found Items</h1><div class='card'>Keys - Library</div></div>
+<section class="section">
+    <h1>Found Items</h1>
+    <p>Live reports loaded from Firebase Firestore.</p>
+    <div class="filters">
+        <input id="searchInput" placeholder="Search found reports...">
+        <select id="categoryFilter">
+            <option value="">All categories</option>
+            <option>Wallet</option><option>Phone</option><option>Bag</option><option>Documents</option><option>Keys</option><option>Electronics</option><option>Other</option>
+        </select>
+    </div>
+    <div id="itemsContainer" class="cards item-grid" data-type="found"></div>
+</section>
 
-<footer>© 2026 Lost & Found System</footer>
+<footer>© 2026 Lost &amp; Found Pakistan</footer>
+<script type="module" src="main.js"></script>
 </body>
 </html>

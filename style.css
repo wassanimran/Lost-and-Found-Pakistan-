@@ -1129,3 +1129,305 @@ footer a:hover { color: var(--white); }
   .hero-cta { flex-direction: column; align-items: center; }
   .search-bar { flex-direction: column; }
 }
+
+/* ── Firebase Auth & Firestore UI ─────────────────────────── */
+.hero-actions,
+.filters,
+.auth-tabs {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.btn,
+button.btn,
+.nav-button {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all var(--transition);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+  background: var(--cyan);
+  color: var(--navy);
+}
+
+.btn-primary:hover {
+  background: var(--white);
+  color: var(--navy);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.12);
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.28);
+}
+
+.section .btn-secondary {
+  background: var(--navy);
+}
+
+.nav-button {
+  color: rgba(255,255,255,0.72);
+  background: rgba(239,68,68,0.14);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+}
+
+.nav-button:hover {
+  color: var(--white);
+  background: rgba(239,68,68,0.35);
+}
+
+.auth-status,
+.hero-status {
+  max-width: 720px;
+  margin: 18px auto 0;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(0,200,232,0.1);
+  border: 1px solid rgba(0,200,232,0.22);
+  color: var(--cyan-dark);
+  font-weight: 600;
+  text-align: center;
+}
+
+.hero-status {
+  color: var(--white);
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.18);
+}
+
+.auth-section,
+.form-section {
+  max-width: 900px;
+}
+
+.auth-grid {
+  max-width: 560px;
+  margin: 28px auto 0;
+}
+
+.auth-card,
+.firebase-form {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 28px;
+  border: 1px solid var(--gray-100);
+}
+
+.auth-panel {
+  display: none;
+}
+
+.auth-panel.active {
+  display: grid;
+  gap: 16px;
+}
+
+.auth-tabs button {
+  background: var(--white);
+  color: var(--navy);
+  border: 1px solid var(--gray-200);
+  border-radius: 99px;
+  padding: 9px 18px;
+  font-weight: 700;
+}
+
+.auth-tabs button.active,
+.auth-tabs button:hover {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: var(--navy);
+}
+
+.firebase-form {
+  display: grid;
+  gap: 18px;
+  max-width: 720px;
+  margin: 28px auto 0;
+}
+
+.firebase-form label,
+.auth-card label {
+  display: grid;
+  gap: 7px;
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.firebase-form input,
+.firebase-form textarea,
+.firebase-form select,
+.auth-card input,
+.filters input,
+.filters select {
+  width: 100%;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--text);
+  background: var(--white);
+  outline: none;
+  transition: all var(--transition);
+}
+
+.firebase-form textarea,
+.auth-card textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.firebase-form input:focus,
+.firebase-form textarea:focus,
+.firebase-form select:focus,
+.auth-card input:focus,
+.filters input:focus,
+.filters select:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0,200,232,0.12);
+}
+
+.filters {
+  justify-content: flex-start;
+  margin: 24px 0;
+}
+
+.filters input {
+  max-width: 380px;
+}
+
+.filters select {
+  max-width: 220px;
+}
+
+.item-grid {
+  align-items: stretch;
+}
+
+.item-card {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  text-align: left;
+}
+
+.item-card h3 {
+  padding-right: 80px;
+}
+
+.item-badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 800;
+  background: var(--gray-100);
+  color: var(--navy);
+}
+
+.item-badge.lost {
+  background: rgba(239,68,68,0.12);
+  color: var(--danger);
+}
+
+.item-badge.found {
+  background: rgba(16,185,129,0.12);
+  color: var(--success);
+}
+
+.item-meta {
+  display: grid;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.empty-state,
+.loading-message {
+  grid-column: 1 / -1;
+  width: 100%;
+  padding: 24px;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  color: var(--text-muted);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.char-counter {
+  text-align: right;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.toast-container {
+  position: fixed;
+  top: 88px;
+  right: 22px;
+  z-index: 9999;
+  display: grid;
+  gap: 10px;
+  max-width: min(360px, calc(100vw - 32px));
+}
+
+.toast {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 13px 16px;
+  border-radius: var(--radius-md);
+  color: var(--white);
+  box-shadow: var(--shadow-lg);
+  animation: slideIn 0.25s ease forwards;
+}
+
+.toast.success { background: var(--success); }
+.toast.error { background: var(--danger); }
+.toast.info { background: var(--navy); }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(20px); }
+}
+
+@media (max-width: 760px) {
+  .auth-card,
+  .firebase-form {
+    padding: 22px;
+  }
+
+  .filters input,
+  .filters select {
+    max-width: none;
+  }
+}
