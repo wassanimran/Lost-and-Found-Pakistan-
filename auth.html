@@ -3,11 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login or Sign Up</title>
+    <title>Login / Sign Up — Lost &amp; Found Pakistan</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Auth page overrides ── */
+        body { background: var(--bg, #0d1117); }
+
+        .auth-page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .auth-hero {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 60%, #0a1628 100%);
+            padding: 48px 20px 32px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0,200,232,0.12);
+        }
+
+        .auth-hero h1 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            margin: 0 0 8px;
+            color: #fff;
+        }
+
+        .auth-hero h1 span { color: var(--accent, #00c8e8); }
+
+        .auth-hero p {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .auth-container {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 16px 60px;
+            background: var(--bg, #0d1117);
+        }
+
+        .auth-box {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        /* Tab bar */
+        .tab-bar {
+            display: flex;
+            background: #161b22;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 24px;
+            gap: 4px;
+        }
+
+        .tab-bar button {
+            flex: 1;
+            padding: 10px 8px;
+            border: none;
+            border-radius: 9px;
+            background: transparent;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-bar button.active {
+            background: var(--accent, #00c8e8);
+            color: #000;
+            box-shadow: 0 2px 12px rgba(0,200,232,0.35);
+        }
+
+        /* Panels */
+        .auth-panel {
+            display: none;
+            background: #161b22;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 32px 28px;
+            animation: panelIn 0.25s ease;
+        }
+
+        .auth-panel.active { display: block; }
+
+        @keyframes panelIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-panel h2 {
+            font-size: 1.25rem;
+            margin: 0 0 6px;
+            color: #fff;
+        }
+
+        .auth-panel .panel-sub {
+            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
+            margin: 0 0 24px;
+        }
+
+        /* Fields */
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .field-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field-wrap label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .input-icon-wrap {
+            position: relative;
+        }
+
+        .input-icon-wrap .icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .input-icon-wrap input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px 40px 12px 40px;
+            background: #0d1117;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .input-icon-wrap input:focus {
+            border-color: var(--accent, #00c8e8);
+            box-shadow: 0 0 0 3px rgba(0,200,232,0.15);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            opacity: 0.4;
+            padding: 4px;
+            transition: opacity 0.2s;
+        }
+
+        .toggle-password:hover { opacity: 0.8; }
+
+        .field-error {
+            color: #ef4444;
+            font-size: 0.78rem;
+            margin-top: 2px;
+        }
+
+        /* Submit button */
+        .btn-auth {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #00c8e8, #0099bb);
+            border: none;
+            border-radius: 10px;
+            color: #000;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+            box-shadow: 0 4px 16px rgba(0,200,232,0.3);
+        }
+
+        .btn-auth:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,200,232,0.4); }
+        .btn-auth:active { transform: none; }
+        .btn-auth:disabled { opacity: 0.55; transform: none; cursor: not-allowed; }
+
+        .btn-auth-secondary {
+            background: transparent;
+            border: 1px solid rgba(0,200,232,0.5);
+            color: var(--accent, #00c8e8);
+            box-shadow: none;
+        }
+
+        .btn-auth-secondary:hover { background: rgba(0,200,232,0.08); box-shadow: none; }
+
+        /* Divider / switch */
+        .panel-switch {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.45);
+        }
+
+        .panel-switch button {
+            background: none;
+            border: none;
+            color: var(--accent, #00c8e8);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 4px;
+        }
+
+        .panel-switch button:hover { text-decoration: underline; }
+
+        /* Password strength */
+        .strength-bar-wrap {
+            display: flex;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .strength-seg {
+            flex: 1;
+            height: 3px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.1);
+            transition: background 0.3s;
+        }
+
+        .strength-label {
+            font-size: 0.75rem;
+            margin-top: 4px;
+            color: rgba(255,255,255,0.4);
+        }
+
+    </style>
 <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
-<body>
+<body class="auth-page-wrapper">
+
 <header>
     <h2>Lost &amp; <span>Found</span></h2>
     <nav>
@@ -21,40 +274,190 @@
         <a href="contact.html">Contact</a>
     </nav>
 </header>
-<section class="section auth-section">
-    <h1>Account Access</h1>
-    <p id="authStatus" class="auth-status">Sign in or create an account to submit reports.</p>
 
-    <div class="auth-tabs">
-        <button type="button" class="active" data-target="loginPanel">Login</button>
-        <button type="button" data-target="signupPanel">Sign Up</button>
-        <button type="button" data-target="resetPanel">Reset Password</button>
-    </div>
+<div class="auth-hero">
+    <h1>Lost &amp; <span>Found</span> Pakistan</h1>
+    <p>Sign in to submit and track reports across Pakistan</p>
+</div>
 
-    <div class="auth-grid">
-        <form id="loginForm" class="auth-panel auth-card active" novalidate>
-            <h2>Login</h2>
-            <label>Email<input type="email" name="email" required autocomplete="email"></label>
-            <label>Password<input type="password" name="password" required autocomplete="current-password"></label>
-            <button class="btn btn-primary" type="submit">Login</button>
+<div class="auth-container">
+    <div class="auth-box">
+
+        <!-- Tab bar -->
+        <div class="tab-bar" role="tablist">
+            <button type="button" class="active" data-target="loginPanel" role="tab" aria-selected="true">Login</button>
+            <button type="button" data-target="signupPanel" role="tab" aria-selected="false">Sign Up</button>
+            <button type="button" data-target="resetPanel" role="tab" aria-selected="false">Reset</button>
+        </div>
+
+        <!-- LOGIN -->
+        <form id="loginPanel" class="auth-panel active" novalidate>
+            <h2>Welcome back</h2>
+            <p class="panel-sub">Sign in to your account</p>
+
+            <div class="field-group">
+                <div class="field-wrap">
+                    <label for="loginEmail">Email</label>
+                    <div class="input-icon-wrap">
+                        <span class="icon">✉</span>
+                        <input id="loginEmail" type="email" name="email" required
+                               placeholder="you@example.com" autocomplete="email">
+                    </div>
+                </div>
+
+                <div class="field-wrap">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-icon-wrap">
+                        <span class="icon">🔒</span>
+                        <input id="loginPassword" type="password" name="password" required
+                               placeholder="••••••••" autocomplete="current-password">
+                        <button type="button" class="toggle-password" aria-label="Show password">👁</button>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-auth">Sign In</button>
+
+            <p class="panel-switch">
+                Don't have an account?
+                <button type="button" data-target="signupPanel">Create one</button>
+            </p>
         </form>
 
-        <form id="signupForm" class="auth-panel auth-card" novalidate>
-            <h2>Create Account</h2>
-            <label>Full Name<input type="text" name="name" required autocomplete="name"></label>
-            <label>Email<input type="email" name="email" required autocomplete="email"></label>
-            <label>Password<input type="password" name="password" required minlength="6" autocomplete="new-password"></label>
-            <button class="btn btn-primary" type="submit">Create Account</button>
+        <!-- SIGN UP -->
+        <form id="signupPanel" class="auth-panel" novalidate>
+            <h2>Create account</h2>
+            <p class="panel-sub">Free to join — help reunite people with their belongings</p>
+
+            <div class="field-group">
+                <div class="field-wrap">
+                    <label for="signupName">Full Name</label>
+                    <div class="input-icon-wrap">
+                        <span class="icon">👤</span>
+                        <input id="signupName" type="text" name="name" required
+                               placeholder="Ahmed Khan" autocomplete="name">
+                    </div>
+                </div>
+
+                <div class="field-wrap">
+                    <label for="signupEmail">Email</label>
+                    <div class="input-icon-wrap">
+                        <span class="icon">✉</span>
+                        <input id="signupEmail" type="email" name="email" required
+                               placeholder="you@example.com" autocomplete="email">
+                    </div>
+                </div>
+
+                <div class="field-wrap">
+                    <label for="signupPassword">Password</label>
+                    <div class="input-icon-wrap">
+                        <span class="icon">🔒</span>
+                        <input id="signupPassword" type="password" name="password" required
+                               minlength="6" placeholder="Min. 6 characters" autocomplete="new-password">
+                        <button type="button" class="toggle-password" aria-label="Show password">👁</button>
+                    </div>
+                    <div class="strength-bar-wrap" id="strengthBar">
+                        <div class="strength-seg"></div>
+                        <div class="strength-seg"></div>
+                        <div class="strength-seg"></div>
+                        <div class="strength-seg"></div>
+                    </div>
+                    <div class="strength-label" id="strengthLabel">Enter a password</div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-auth">Create Account</button>
+
+            <p class="panel-switch">
+                Already have an account?
+                <button type="button" data-target="loginPanel">Sign in</button>
+            </p>
         </form>
 
-        <form id="resetPasswordForm" class="auth-panel auth-card" novalidate>
-            <h2>Reset Password</h2>
-            <label>Email<input type="email" name="email" required autocomplete="email"></label>
-            <button class="btn btn-secondary" type="submit">Send Reset Link</button>
+        <!-- RESET -->
+        <form id="resetPanel" class="auth-panel" novalidate>
+            <h2>Reset password</h2>
+            <p class="panel-sub">We'll email you a reset link</p>
+
+            <div class="field-group">
+                <div class="field-wrap">
+                    <label for="resetEmail">Email</label>
+                    <div class="input-icon-wrap">
+                        <span class="icon">✉</span>
+                        <input id="resetEmail" type="email" name="email" required
+                               placeholder="you@example.com" autocomplete="email">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-auth btn-auth-secondary">Send Reset Link</button>
+
+            <p class="panel-switch">
+                Remembered it?
+                <button type="button" data-target="loginPanel">Back to login</button>
+            </p>
         </form>
-    </div>
-</section>
+
+    </div><!-- /.auth-box -->
+</div><!-- /.auth-container -->
+
 <footer>© 2026 Lost &amp; Found Pakistan</footer>
+
 <script type="module" src="main.js"></script>
+<script>
+    /* ── Password strength meter ── */
+    const pwInput = document.getElementById('signupPassword');
+    const segs = document.querySelectorAll('#strengthBar .strength-seg');
+    const label = document.getElementById('strengthLabel');
+    const colours = ['#ef4444','#f97316','#eab308','#22c55e'];
+    const labels  = ['Weak','Fair','Good','Strong'];
+
+    function calcStrength(p) {
+        let score = 0;
+        if (p.length >= 6) score++;
+        if (p.length >= 10) score++;
+        if (/[A-Z]/.test(p) && /[a-z]/.test(p)) score++;
+        if (/[^A-Za-z0-9]/.test(p) || /\d/.test(p)) score++;
+        return score;
+    }
+
+    pwInput?.addEventListener('input', () => {
+        const p = pwInput.value;
+        const s = p ? calcStrength(p) : 0;
+        segs.forEach((seg, i) => {
+            seg.style.background = i < s ? colours[Math.min(s-1,3)] : 'rgba(255,255,255,0.1)';
+        });
+        label.textContent = p ? labels[Math.min(s-1,3)] : 'Enter a password';
+        label.style.color = p ? colours[Math.min(s-1,3)] : 'rgba(255,255,255,0.4)';
+    });
+
+    /* ── Toggle password visibility ── */
+    document.querySelectorAll('.toggle-password').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const inp = btn.previousElementSibling;
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+            btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+        });
+    });
+
+    /* ── Tab panel switch ── */
+    function switchPanel(targetId) {
+        document.querySelectorAll('.tab-bar button').forEach(b => {
+            const active = b.dataset.target === targetId;
+            b.classList.toggle('active', active);
+            b.setAttribute('aria-selected', String(active));
+        });
+        document.querySelectorAll('.auth-panel').forEach(p => {
+            p.classList.toggle('active', p.id === targetId);
+        });
+    }
+
+    document.querySelectorAll('[data-target]').forEach(el => {
+        el.addEventListener('click', () => switchPanel(el.dataset.target));
+    });
+
+    /* ── Expose switchPanel so main.js can call it ── */
+    window.switchAuthPanel = switchPanel;
+</script>
 </body>
 </html>

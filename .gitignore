@@ -1,0 +1,35 @@
+# Node modules (if any)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+*.code-workspace
+
+# Build outputs
+dist/
+build/
+
+# Environment files
+.env
+
+# OneDrive/Temp files
+~$*
+
+# Logs
+npm-debug.log*
+.yarn-debug.log*
+.yarn-error.log*
+
+# Python caches (just in case)
+__pycache__/
+*.pyc
+
+# JetBrains IDEs
+.idea/
+
+# Firebase local files
+.firebase/
